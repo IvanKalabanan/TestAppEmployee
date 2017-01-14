@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="@dimen/ten_dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/surname"
+        android:paddingStart="@dimen/ten_dp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/thirty_five_dp"
+        android:background="@drawable/edit_text_border"
+        android:hint="@string/write_surname" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/five_dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/name"
+            android:paddingStart="@dimen/ten_dp"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/third_dp"
+            android:layout_marginEnd="@dimen/three_dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/edit_text_border"
+            android:hint="@string/name" />
+
+        <EditText
+            android:id="@+id/secondName"
+            android:paddingStart="@dimen/ten_dp"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/third_dp"
+            android:layout_marginStart="@dimen/three_dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/edit_text_border"
+            android:hint="@string/name2" />
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/date"
+        android:paddingStart="@dimen/ten_dp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/thirty_five_dp"
+        android:layout_marginTop="@dimen/five_dp"
+        android:background="@drawable/edit_text_border"
+        android:hint="@string/date"
+        android:inputType="date" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/five_dp"
+        android:background="@drawable/edit_text_border">
+
+        <Spinner
+            android:id="@+id/city"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/thirty_five_dp"
+            android:entries="@array/city"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/five_dp"
+        android:background="@drawable/edit_text_border">
+
+        <Spinner
+            android:id="@+id/position"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/thirty_five_dp"
+            android:entries="@array/position"
+            />
+
+    </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/addEmployee"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/fivty_dp"
+        android:text="@string/add"
+        android:textAllCaps="false"
+        android:layout_gravity="bottom"/>
+
+</FrameLayout>
