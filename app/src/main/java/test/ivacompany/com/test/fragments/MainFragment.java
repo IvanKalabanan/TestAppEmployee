@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,12 +19,12 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import test.ivacompany.com.test.R;
 import test.ivacompany.com.test.TestApp;
-import test.ivacompany.com.test.utils.Constants;
-import test.ivacompany.com.test.utils.RecycleViewItemDecoration;
-import test.ivacompany.com.test.utils.Utils;
 import test.ivacompany.com.test.adapters.EmployeeRecyclerViewAdapter;
 import test.ivacompany.com.test.intefaces.FragmentRequestListener;
 import test.ivacompany.com.test.models.Employee;
+import test.ivacompany.com.test.utils.Constants;
+import test.ivacompany.com.test.utils.RecycleViewItemDecoration;
+import test.ivacompany.com.test.utils.Utils;
 
 /**
  * Created by root on 13.01.17.
@@ -56,7 +57,7 @@ public class MainFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         requestListener = (FragmentRequestListener) getActivity();
-        listEm = Utils.readFromDB();
+        listEm = Utils.readFromRealm();
         if (listEm.isEmpty()){
             noData.setVisibility(View.VISIBLE);
         } else {
@@ -74,6 +75,24 @@ public class MainFragment extends Fragment {
                         LinearLayoutManager.VERTICAL
                 )
         );
+        ItemTouchHelper helper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                adapter.remove(viewHolder.getAdapterPosition());
+            }
+
+            @Override
+            public void onSelectedChanged(RecyclerView.ViewHolder viewHolder, int actionState) {
+                super.onSelectedChanged(viewHolder, actionState);
+            }
+
+        });
+        helper.attachToRecyclerView(userList);
         userList.setAdapter(adapter);
     }
 

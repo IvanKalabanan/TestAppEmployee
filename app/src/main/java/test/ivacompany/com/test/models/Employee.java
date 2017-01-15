@@ -2,19 +2,26 @@ package test.ivacompany.com.test.models;
 
 import java.util.Date;
 
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+
 /**
  * Created by root on 13.01.17.
  */
 
-public class Employee {
+public class Employee extends RealmObject {
 
+    @PrimaryKey
     private long id;
+
     private String name;
     private String surname;
     private String middleName;
     private Date birthday;
     private String city;
     private String position;
+
+    public Employee(){}
 
     public Employee(long id, String name, String suname, String middleName, Date birthday, String city, String position) {
         this.id = id;

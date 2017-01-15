@@ -15,6 +15,7 @@ import butterknife.ButterKnife;
 import test.ivacompany.com.test.R;
 import test.ivacompany.com.test.intefaces.FragmentRequestListener;
 import test.ivacompany.com.test.models.Employee;
+import test.ivacompany.com.test.utils.Utils;
 
 /**
  * Created by root on 13.01.17.
@@ -38,6 +39,12 @@ public class EmployeeRecyclerViewAdapter  extends RecyclerView.Adapter<EmployeeR
                 .from(parent.getContext())
                 .inflate(R.layout.item_user, parent, false);
         return new FileHolder(listItemView);
+    }
+
+    public void remove(int position) {
+        Utils.removeFromRealm(employeeList.get(position).getId());
+        employeeList.remove(position);
+        notifyDataSetChanged();
     }
 
     @Override

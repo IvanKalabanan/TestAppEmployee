@@ -67,7 +67,7 @@ public class ProfileFragment extends Fragment {
 
         ButterKnife.bind(this, root);
 
-        employee = Utils.getEmployee(getArguments().getLong(Constants.ID));
+        employee = Utils.getRealmEmployee(getArguments().getLong(Constants.ID));
 
         if (employee != null) {
             addEmployee.setText(getString(R.string.update));
@@ -118,21 +118,23 @@ public class ProfileFragment extends Fragment {
         }
         if (employee != null) {
             try {
+                Utils.getRealm().beginTransaction();
                 employee.setName(name.getText().toString());
                 employee.setSurname(surname.getText().toString());
                 employee.setMiddleName(secondName.getText().toString());
                 employee.setBirthday(formatter.parse(date.getText().toString()));
                 employee.setCity(city.getSelectedItem().toString());
                 employee.setPosition(position.getSelectedItem().toString());
+                Utils.getRealm().commitTransaction();
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            Utils.updateUser(employee);
+            Utils.updateRealmUser(employee);
         } else {
             try {
-                Utils.addEmployee(
+                Utils.addToRealm(
                         new Employee(
-                                0,
+                                (Utils.getRealm().where(Employee.class).max(Constants.ID).longValue() + 1),
                                 name.getText().toString(),
                                 surname.getText().toString(),
                                 secondName.getText().toString(),
